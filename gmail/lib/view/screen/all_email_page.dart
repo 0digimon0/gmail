@@ -6,6 +6,7 @@ import 'package:gmail/bloc/drawer_event.dart';
 import 'package:gmail/bloc/mail_bloc.dart';
 import 'package:gmail/bloc/mail_event.dart';
 import 'package:gmail/model/email_object.dart';
+import 'package:gmail/router/router.dart';
 import 'package:gmail/view/dialog/account_setting_dialog.dart';
 import 'package:gmail/view/widgets/mail_action_bar_view.dart';
 import 'package:gmail/view/widgets/mail_item_view.dart';
@@ -110,7 +111,10 @@ class _AllMailViewState extends State<AllMailView>
           },
         ),
         floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  AppRouter.generateRoute(RouteSettings(name: composeRoute)));
+            },
             label: AnimatedSwitcher(
               duration: Duration(milliseconds: 700),
               transitionBuilder: (Widget child, Animation<double> animation) =>

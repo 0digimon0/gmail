@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MeetingPage extends StatelessWidget {
+  VoidCallback openDrawerMenu;
+
+  MeetingPage({this.openDrawerMenu, Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,9 +16,14 @@ class MeetingPage extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        leading: Icon(
-          Icons.menu,
-          color: Colors.black,
+        leading: IconButton(
+          icon: Icon(
+            Icons.menu,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            openDrawerMenu();
+          },
         ),
         actions: [
           Icon(

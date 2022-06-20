@@ -49,11 +49,12 @@ class HomePage extends StatelessWidget {
                   BlocProvider<ListMailBloc>(
                     create: (context) => listMailBloc,
                     child: AllMailView(
-                      key: UniqueKey(),
                       openDrawerMenu: openDrawerMenu,
                     ),
                   ),
-                  MeetingPage(),
+                  MeetingPage(
+                    openDrawerMenu: openDrawerMenu,
+                  ),
                 ],
               )),
           bottomNavigationBar:
