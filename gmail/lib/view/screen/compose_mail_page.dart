@@ -10,6 +10,7 @@ class ComposeMailPage extends StatefulWidget {
 
 class ComposeMailPageState extends State<ComposeMailPage> {
   final TextEditingController _controller = TextEditingController();
+  FocusNode _focus = FocusNode();
   bool isOpenCC = false;
   int sendToMailIndex = 0;
 
@@ -26,6 +27,16 @@ class ComposeMailPageState extends State<ComposeMailPage> {
     _controller.addListener(() {
       // start filter something here
     });
+    _focus.addListener(_onFocusChange);
+  }
+
+  void _onFocusChange() {
+    debugPrint("Focus: ${_focus.hasFocus.toString()}");
+    if (_focus.hasFocus) {
+      setState(() {
+        isOpenCC = false;
+      });
+    }
   }
 
   @override
@@ -54,7 +65,9 @@ class ComposeMailPageState extends State<ComposeMailPage> {
                 color: Colors.black,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
               icon: Icon(
                 Icons.send_outlined,
                 color: Colors.black,
@@ -144,8 +157,9 @@ class ComposeMailPageState extends State<ComposeMailPage> {
                               child: IconButton(
                                 icon: Icon(Icons.expand_circle_down_outlined),
                                 onPressed: (() {
+                                  _focus.unfocus;
                                   setState(() {
-                                    isOpenCC = !isOpenCC;
+                                    isOpenCC = true;
                                   });
                                 }),
                               ))
@@ -219,6 +233,7 @@ class ComposeMailPageState extends State<ComposeMailPage> {
               padding: EdgeInsets.only(left: 10, right: 10),
               child: TextField(
                   controller: _controller,
+                  focusNode: _focus,
                   decoration: InputDecoration(
                       labelStyle: TextStyle(color: Colors.black, fontSize: 18),
                       border: InputBorder.none,
@@ -230,6 +245,7 @@ class ComposeMailPageState extends State<ComposeMailPage> {
             Container(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: TextField(
+                  // focusNode: _focus,
                   decoration: InputDecoration(
                       labelStyle: TextStyle(color: Colors.black, fontSize: 18),
                       border: InputBorder.none,
@@ -273,5 +289,12 @@ class ComposeMailPageState extends State<ComposeMailPage> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _focus.dispose();
+    _controller.dispose();
+    super.dispose();
   }
 }

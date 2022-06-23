@@ -23,7 +23,9 @@ class AccountSettingDialog extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: IconButton(
                       icon: Icon(Icons.close),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
                   ),
                   Align(

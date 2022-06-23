@@ -27,7 +27,6 @@ class MailItemViewState extends State<MailItemView> {
 
   @override
   void initState() {
-    debugPrint("___ MailItemViewState");
     _bloc = BlocProvider.of<ListMailBloc>(context);
     super.initState();
   }
@@ -75,7 +74,9 @@ class MailItemViewState extends State<MailItemView> {
                         child: SizedBox(
                             width: AVATAR_SIZE,
                             height: AVATAR_SIZE,
-                            child: Icon(Icons.menu)),
+                            child: isSelected
+                                ? Icon(Icons.check)
+                                : Icon(Icons.menu)),
                         onTap: () {
                           setState(() {
                             isSelected = !isSelected;

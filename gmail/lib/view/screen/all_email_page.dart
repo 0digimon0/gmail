@@ -159,7 +159,7 @@ class _AllMailViewState extends State<AllMailView>
         itemCount: 20,
         itemBuilder: (context, index) {
           if (index == 0) {
-            return Container(
+            return SizedBox(
               height: 80,
             );
           } else if (index == 1) {
